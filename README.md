@@ -135,7 +135,7 @@ checkout the project from github.
 
     git clone git@github.com:JohnathanMarkSmith/NoMySQL.git
     cd NoMySQL
-    mvn packge
+    mvn package
     cd target
     java -jar NoMySQL.jar
 
