@@ -15,7 +15,8 @@ import javax.persistence.*;
 @Entity
 
 @Table(name = "messages")
-public class Message {
+public class Message
+{
 
     @Id
     @Column(name = "id")
@@ -25,27 +26,32 @@ public class Message {
     @Column(name = "message")
     private String message;
 
-    public String getMessage() {
+    public String getMessage()
+    {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(String message)
+    {
         this.message = message;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Message{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
                 '}';
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 }

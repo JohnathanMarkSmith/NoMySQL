@@ -21,24 +21,28 @@ import java.util.List;
 
 
 @Service
-public class MessageServiceImpl implements MessageService {
+public class MessageServiceImpl implements MessageService
+{
 
 
     private Log log = null;
     @Autowired
     private MessageDao messageDao;
 
-    public MessageServiceImpl() {
+    public MessageServiceImpl()
+    {
         super();
         log = LogFactory.getLog(MessageServiceImpl.class);
 
     }
 
-    public List<Message> listMessages() {
+    public List<Message> listMessages()
+    {
         return messageDao.listMessages();
     }
 
-    public void SaveMessage(Message message) {
+    public void SaveMessage(Message message)
+    {
         messageDao.SaveOrUpdateMessage(message);
     }
 

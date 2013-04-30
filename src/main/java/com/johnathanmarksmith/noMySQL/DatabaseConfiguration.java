@@ -24,8 +24,8 @@ import java.util.Properties;
  * Email:  john@johnathanmarksmith.com
  * <p/>
  * Comments:
- *
- *  This is just a example on how to setup a database using JavaConfig
+ * <p/>
+ * This is just a example on how to setup a database using JavaConfig
  */
 
 @Configuration
@@ -37,7 +37,8 @@ public class DatabaseConfiguration
 
 
     @Bean
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource)
+    {
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
         resourceDatabasePopulator.addScript(new ClassPathResource("/schema.sql"));
 
@@ -48,7 +49,8 @@ public class DatabaseConfiguration
     }
 
     @Bean
-    public DataSource hsqlDataSource() {
+    public DataSource hsqlDataSource()
+    {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
         basicDataSource.setUsername("sa");
@@ -59,7 +61,8 @@ public class DatabaseConfiguration
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(Environment environment,
-                                                  DataSource dataSource) {
+                                                  DataSource dataSource)
+    {
 
         String packageOfModelBeans = Message.class.getPackage().getName();
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -69,7 +72,8 @@ public class DatabaseConfiguration
         return factoryBean;
     }
 
-    protected Properties buildHibernateProperties(Environment env) {
+    protected Properties buildHibernateProperties(Environment env)
+    {
         Properties hibernateProperties = new Properties();
 
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -90,7 +94,8 @@ public class DatabaseConfiguration
     }
 
     @Bean
-    public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
+    public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+    {
         return new HibernateTransactionManager(sessionFactory);
     }
 

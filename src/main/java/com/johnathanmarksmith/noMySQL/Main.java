@@ -18,8 +18,8 @@ import static org.apache.log4j.Logger.getLogger;
  * Email:  john@johnathanmarksmith.com
  * <p/>
  * Comments:
- *
- *    This is just a example on how to use Spring, Maven, JavaConfig
+ * <p/>
+ * This is just a example on how to use Spring, Maven, JavaConfig
  */
 
 
@@ -31,7 +31,7 @@ public class Main
     public static void main(String[] args)
     {
         // in this setup, both the main(String[]) method and the JUnit method both specify that
-        ApplicationContext context = new AnnotationConfigApplicationContext( DatabaseConfiguration.class );
+        ApplicationContext context = new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
 
         MessageService mService = context.getBean(MessageService.class);
 
