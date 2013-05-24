@@ -189,10 +189,10 @@ checkout the project from github.
 
 Thats it and you should see the following line on the console:
 
-    2013-04-30 10:47:17,790 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - You Have 2 Message(s) In The Database
-    2013-04-30 10:47:17,790 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 1, Message: Hello World.
-    2013-04-30 10:47:17,790 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 2, Message: I love NYC.
-
+    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - You Have 2 Message(s) In The Database
+    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 1, Message: Hello World.
+    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 2, Message: I love NYC.
+    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - This is the end!!!!
 This Project is using Java, Spring, Hibernate, Maven, jUnit, Log4J, HSQLDB and Github.
 
 If you have any questions please email me at john@johnathanmarksmith.com
