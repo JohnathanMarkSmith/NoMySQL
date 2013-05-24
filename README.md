@@ -44,7 +44,7 @@ Here is the main code to my sample project
              * This is going to do a 2nd Message in database.
              *
              */
-            message.setMessage("I love NYC");
+            message.setMessage("I love Regan");
             mService.SaveMessage(message);
 
             /**
@@ -189,10 +189,10 @@ checkout the project from github.
 
 Thats it and you should see the following line on the console:
 
-    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - You Have 2 Message(s) In The Database
-    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 1, Message: Hello World.
-    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 2, Message: I love NYC.
-    2013-05-24 08:27:11,172 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - This is the end!!!!
+    2013-05-24 08:28:23,401 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - You Have 2 Message(s) In The Database
+    2013-05-24 08:28:23,401 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 1, Message: Hello World.
+    2013-05-24 08:28:23,401 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - Message: ID: 2, Message: I love Regan.
+    2013-05-24 08:28:23,401 [main] DEBUG com.johnathanmarksmith.noMySQL.Main - This is the end!!!!
 This Project is using Java, Spring, Hibernate, Maven, jUnit, Log4J, HSQLDB and Github.
 
 If you have any questions please email me at john@johnathanmarksmith.com

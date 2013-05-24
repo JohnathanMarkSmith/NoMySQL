@@ -55,7 +55,7 @@ public class Main
          * This is going to do a 2nd Message in database.
          *
          */
-        message.setMessage("I love NYC");
+        message.setMessage("I love Regan");
         mService.SaveMessage(message);
 
         /**
