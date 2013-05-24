@@ -15,11 +15,12 @@ import java.util.List;
 
 
 /**
- * Date:   3/11/13 / 11:44 AM
+ * Date:   5/24/13 / 7:53 AM
  * Author: Johnathan Mark Smith
  * Email:  john@johnathanmarksmith.com
- * <p/>
+ *
  * Comments:
+ *
  * This is the interface to the DAO for Message Database
  */
 
@@ -38,6 +39,17 @@ public class MessageDaoImpl implements MessageDao
         System.out.println("setup()");
     }
 
+
+    /**
+     * Date:   5/24/13 / 7:53 AM
+     * Author: Johnathan Mark Smith
+     * Email:  john@johnathanmarksmith.com
+     *
+     * Comments:
+     *
+     *    This is uses to return a list of messages
+     */
+
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<Message> listMessages()
@@ -54,6 +66,16 @@ public class MessageDaoImpl implements MessageDao
         }
     }
 
+    /**
+     * Date:   5/24/13 / 7:53 AM
+     * Author: Johnathan Mark Smith
+     * Email:  john@johnathanmarksmith.com
+     *
+     * Comments:
+     *
+     *    This is used to insert a new record into the database
+     *
+     */
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void SaveOrUpdateMessage(Message message)

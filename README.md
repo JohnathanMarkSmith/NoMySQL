@@ -1,33 +1,38 @@
-### NoMySQL
+###  Spring's Java Configuration (JavaConfig) style with Maven, JUnit, Log4J, Hibernate and HyperSQL (hsqldb)
 
 The days of using MySQL, DB2, PostgreSQL etc for development is over.. I don't know why any programmer would be developing using them..
 
 Every deveroper should be running some in memory database like HSQLDB as part of the project for development and testing then move the a full size database for unit testing, staging and production.
 
-This is a sample Spring Project to show how to use JavaConfig and HSQLDB. This example also will show how to use @PropertySource for reading properties and using the Environment Object to add properties to your objects.
+This is a sample Spring Project to show how to use Spring's Java Configuration (JavaConfig) style with Maven, JUnit, Log4J, Hibernate and HyperSQL (hsqldb).
 
-### How to use Spring JavaConfig and not XML files for configuation
+This example also will show how to use @PropertySource for reading properties and using the Environment Object to add properties to your objects.
 
-Consider replacing Spring XML configuration with JavaConfig
+### How to use Spring's Java Configuration (JavaConfig) style and not XML files for configuation
 
-Using Spring XML configuration is so 2000’s the time has come to push the XML away and look at JavaConfig.
+Consider replacing Spring XML configuration with Spring's Java Configuration (JavaConfig) style is the right way to go right now.
+
+Using Spring XML configuration is so 2000’s the time has come to push the XML away and look at Spring's Java Configuration (JavaConfig) style.
 
 Here is the main code to my sample project
 
-	public class Main
-    {
-
-        private static final Logger LOGGER = getLogger(Main.class);
-
-        public static void main(String[] args)
+	 public static void main(String[] args)
         {
-            // in this setup, both the main(String[]) method and the JUnit method both specify that
-            ApplicationContext context = new AnnotationConfigApplicationContext( DatabaseConfiguration.class );
+            /**
+             *
+             * This is going to setup the database configuration in the applicationContext
+             * you can see that I am using the new Spring's Java Configuration style and not some OLD XML file
+             *
+             */
+            ApplicationContext context = new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
 
             MessageService mService = context.getBean(MessageService.class);
 
             /**
-             *   Saving Message to database
+             *
+             *   This is going to create a message object and set the message to "Hello World" then pass the object to t
+             *   the service layer for inserting into the database
+             *
              */
             Message message = new Message();
             message.setMessage("Hello World");
@@ -35,15 +40,19 @@ Here is the main code to my sample project
 
 
             /**
-             * Saving 2nd Message in database.
+             *
+             * This is going to do a 2nd Message in database.
+             *
              */
             message.setMessage("I love NYC");
             mService.SaveMessage(message);
 
             /**
-             * Getting messages from database
+             *
+             * This is going to get the messages from database and do the following:
              *    - display number of message(s)
              *    - display each message in database
+             *
              */
             List<Message> myList = mService.listMessages();
             LOGGER.debug("You Have " + myList.size() + " Message(s) In The Database");
@@ -52,11 +61,16 @@ Here is the main code to my sample project
             {
                 LOGGER.debug("Message: ID: " + i.getId() + ", Message: " + i.getMessage() + ".");
             }
-        }
-    }
- 
 
-Now lets take a look at how I setup the database in JavaConfig and not in a XML file.
+            /**
+             *
+             * This is the end!!!
+             *
+             */
+            LOGGER.debug("This is the end!!!!");
+        }
+
+Now lets take a good look at how I setup the database with Spring's Java Configuration (JavaConfig) style and not in a XML file.
 
     @Configuration
     @EnableTransactionManagement
@@ -66,10 +80,16 @@ Now lets take a look at how I setup the database in JavaConfig and not in a XML 
     {
 
 
-    @Bean
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-        resourceDatabasePopulator.addScript(new ClassPathResource("/schema.sql"));
+        /**
+         *
+         * This is used to setup the database. It will load the schema.sql file which does a create table so we have
+         * a table to work with in the project
+         */
+        @Bean
+        public DataSourceInitializer dataSourceInitializer(DataSource dataSource)
+        {
+            ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+            resourceDatabasePopulator.addScript(new ClassPathResource("/schema.sql"));
 
             DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
             dataSourceInitializer.setDataSource(dataSource);
@@ -77,8 +97,13 @@ Now lets take a look at how I setup the database in JavaConfig and not in a XML 
             return dataSourceInitializer;
         }
 
+        /**
+         *
+         * This will be setting up a datasource using HyperSQL (hsqldb) in memory
+         */
         @Bean
-        public DataSource hsqlDataSource() {
+        public DataSource hsqlDataSource()
+        {
             BasicDataSource basicDataSource = new BasicDataSource();
             basicDataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
             basicDataSource.setUsername("sa");
@@ -87,19 +112,36 @@ Now lets take a look at how I setup the database in JavaConfig and not in a XML 
             return basicDataSource;
         }
 
+        /**
+         *
+         * This setups the session factory
+         */
         @Bean
         public LocalSessionFactoryBean sessionFactory(Environment environment,
-                                                  DataSource dataSource) {
+                                                      DataSource dataSource)
+        {
 
+            /**
+             *
+             * Getting packageOfModelBean from package of message bean
+             *
+             */
             String packageOfModelBeans = Message.class.getPackage().getName();
+
             LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+
             factoryBean.setDataSource(dataSource);
             factoryBean.setHibernateProperties(buildHibernateProperties(environment));
             factoryBean.setPackagesToScan(packageOfModelBeans);
             return factoryBean;
         }
 
-        protected Properties buildHibernateProperties(Environment env) {
+        /**
+         *
+         * Loading all the hibernate properties from a properties file
+         */
+        protected Properties buildHibernateProperties(Environment env)
+        {
             Properties hibernateProperties = new Properties();
 
             hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -119,8 +161,14 @@ Now lets take a look at how I setup the database in JavaConfig and not in a XML 
             return hibernateProperties;
         }
 
+        /**
+         *
+         * This is setting up the hibernate transaction manager
+         *
+         */
         @Bean
-        public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
+        public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+        {
             return new HibernateTransactionManager(sessionFactory);
         }
 
@@ -129,7 +177,7 @@ Now lets take a look at how I setup the database in JavaConfig and not in a XML 
 
 
 
-You can see how easy it is to use JavaConfig and Not XML.. The time of using XML files with Springs is over...
+You can see how easy it is to use Spring's Java Configuration (JavaConfig) style and Not XML.. The time of using XML files with Springs is over...
 
 checkout the project from github.
 

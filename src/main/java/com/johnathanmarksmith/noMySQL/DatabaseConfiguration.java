@@ -18,14 +18,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 /**
- * Date:   4/29/13 / 8:47 AM
+ * Date:   5/24/13 / 8:05 AM
  * Author: Johnathan Mark Smith
  * Email:  john@johnathanmarksmith.com
- * <p/>
+ *
  * Comments:
- * <p/>
- * This is just a example on how to setup a database using JavaConfig
+ *
+ *    This is a example on how to setup a database with Spring's Java Configuration (JavaConfig) style.
+ *
+ *    As you can see from the code below this is easy and a lot better then using the old style of XML files.
+ *
  */
 
 @Configuration
@@ -36,6 +40,11 @@ public class DatabaseConfiguration
 {
 
 
+    /**
+     *
+     * This is used to setup the database. It will load the schema.sql file which does a create table so we have
+     * a table to work with in the project
+     */
     @Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource)
     {
@@ -48,6 +57,10 @@ public class DatabaseConfiguration
         return dataSourceInitializer;
     }
 
+    /**
+     *
+     * This will be setting up a datasource using HyperSQL (hsqldb) in memory
+     */
     @Bean
     public DataSource hsqlDataSource()
     {
@@ -59,19 +72,34 @@ public class DatabaseConfiguration
         return basicDataSource;
     }
 
+    /**
+     *
+     * This setups the session factory
+     */
     @Bean
     public LocalSessionFactoryBean sessionFactory(Environment environment,
                                                   DataSource dataSource)
     {
 
+        /**
+         *
+         * Getting packageOfModelBean from package of message bean
+         *
+         */
         String packageOfModelBeans = Message.class.getPackage().getName();
+
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(buildHibernateProperties(environment));
         factoryBean.setPackagesToScan(packageOfModelBeans);
         return factoryBean;
     }
 
+    /**
+     *
+     * Loading all the hibernate properties from a properties file
+     */
     protected Properties buildHibernateProperties(Environment env)
     {
         Properties hibernateProperties = new Properties();
@@ -93,6 +121,11 @@ public class DatabaseConfiguration
         return hibernateProperties;
     }
 
+    /**
+     *
+     * This is setting up the hibernate transaction manager
+     *
+     */
     @Bean
     public HibernateTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
     {

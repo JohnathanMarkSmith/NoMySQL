@@ -4,11 +4,14 @@ import javax.persistence.*;
 
 
 /**
- * Date:   3/11/13 / 10:52 AM
- * Author: Johnathan Mark Sm10:53 AM
- * mail:  john@johnathanmarksmith.com
+ * Date:   5/24/13 / 7:54 AM
+ * Author: Johnathan Mark Sm
+ * Email:  john@johnathanmarksmith.com
  * <p/>
  * Comments:
+ *
+ *  This bean is used to insert and list a message object.
+ *
  */
 
 

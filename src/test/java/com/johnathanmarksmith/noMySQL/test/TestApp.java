@@ -13,16 +13,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-/**
- * Date:   4/25/13 / 9:52 AM
- * Author: Johnathan Mark Smith
- * Email:  john@johnathanmarksmith.com
- * <p/>
- * Comments:
- * <p/>
- * This is just a sample jUnit Test to show how to use jUnit and Spring to test my bean.
- */
 
+/**
+ * Date:   5/24/13 / 8:17 AM
+ * Author: Johnathan Mark Smith
+ * Email:  johnathan.smith@uftwf.org
+ *
+ * Comments:
+ *
+ *   This is a very small example of how to use jUnit and
+ *   you can see I am using the same database configuration
+ *   but in most cases yo will never want to do this!!
+ *
+ */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DatabaseConfiguration.class)
@@ -35,7 +38,7 @@ public class TestApp {
     @Test
     public void testDatabase() {
         /**
-         * Get access to service laywer, create new message and insert it into database
+         * Get access to service layer, create new message and insert it into database
          */
         MessageService mService = context.getBean(MessageService.class);
 
